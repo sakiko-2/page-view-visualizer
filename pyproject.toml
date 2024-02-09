@@ -1,6 +1,6 @@
 [tool]
 [tool.poetry]
-authors = ["Your Name <you@example.com>"]
+authors = ["sakiko-2"]
 name = "root"
 version = "0.0.0"
 description = ""
@@ -9,3 +9,7 @@ description = ""
 pandas = "*"
 python = "^3.7"
 seaborn = "*"
+
+[build-system]
+requires = ["poetry-core>=1.9.0"]
+build-backend = "poetry.core.masonry.api"
