@@ -47,18 +47,19 @@ def draw_bar_plot():
 
 
 def draw_box_plot():
-    # Prepare data for box plots (this part is done!)
     df_box = df.copy()
     df_box.reset_index(inplace=True)
     df_box['year'] = [d.year for d in df_box.date]
     df_box['month'] = [d.strftime('%b') for d in df_box.date]
+    months = [calendar.month_abbr[d] for d in list(range(1, 13))]
 
-    # Draw box plots (using Seaborn)
+    fig, (ax1, ax2) = plt.subplots(nrows=1, ncols=2, figsize=(16, 6), layout='constrained')
+    sns.boxplot(data=df_box, x=df_box.year, y=df_box.value, ax=ax1, palette='tab10', flierprops={'marker': 'd'}, fliersize=1)
+    ax1.set(xlabel='Year', ylabel='Page Views', title='Year-wise Box Plot (Trend)', yticks=np.arange(0, 200000.1, 20000))
+    sns.boxplot(data=df_box, x=df_box.month, y=df_box.value, ax=ax2, palette='husl', flierprops={'marker': 'd'}, fliersize=1, order=months)
+    ax2.set(xlabel='Month', ylabel='Page Views', title='Month-wise Box Plot (Seasonality)', yticks=np.arange(0, 200000.1, 20000))
 
+    fig.get_layout_engine().set(w_pad=0.35, h_pad=0.35)
 
-
-
-
-    # Save image and return fig (don't change this part)
     fig.savefig('box_plot.png')
     return fig
